@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>udaykiran</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    .container {
+      display: grid;
+      grid-template-areas: 
+        "header header header"
+        "nav main aside"
+        "footer footer footer";
+      grid-template-columns: 1fr 2fr 1fr;
+      grid-gap: 10px;
+      padding: 20px;
+    }
+
+    header {
+      grid-area: header;
+      background-color:pink;
+      color: black;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    nav {
+      grid-area: nav;
+      background-color: #d9d9d9;
+      padding: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      padding: 10px;
+      background-color: #aabbcc;
+      color: black;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    main {
+      grid-area: main;
+      background-color: #bbccee;
+      padding: 15px;
+    }
+
+    aside {
+      grid-area: aside;
+      background-color: #ddffee;
+      padding: 15px;
+      border-left: 2px solid #ccc;
+    }
+
+    footer {
+      grid-area: footer;
+      background-color: #223344;
+      padding: 10px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-areas:
+          "header"
+          "nav"
+          "main"
+          "aside"
+          "footer";
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      ...UDAY KANNA...
+    </header>
+
+    <nav>
+      <ul>
+       <h3>Skills:</h3>
+        <li>C-programing</li>
+        <li>Java</li>
+        <li>Python</li>
+        <li>HTML&CSS</li>
+      </ul>
+    </nav>
+
+    <main>
+      <h3>About me:</h3>
+      <p>This is uday kiran</p>
+      <p>From palamaner</p>
+      <p>Thank you.</p>
+    </main>
+
+    <aside>
+      <h3>Habits:</h3>
+      <ul>
+        <li>Playing cricket.</li>
+        <li>Reading books.</li>
+      </ul>
+    </aside>
+
+    <footer>....thank for seeing this ONE EEEEE.....</footer>
+  </div>
+</body>
+</html>
