@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mother Theresa Institute</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f4f8;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      background-color: #fff7e6;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      height: 70px;
+      width: 70px;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2b3d8f;
+      margin-left: 20px;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      background-color: #2b2b2b;
+      padding-left: 100px;
+      flex-wrap: wrap;
+    }
+
+    .navbar a,
+    .dropdown button {
+      color: white;
+      padding: 14px 20px;
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .navbar a:hover,
+    .dropdown:hover button {
+      background-color: #555;
+    }
+
+    /* Dropdown */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #444;
+      min-width: 180px;
+      z-index: 1;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+    }
+
+    .dropdown-content a {
+      color: #fff;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background 0.3s ease;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #6c757d;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: right;
+      padding: 10px 20px;
+      background-color: #fff7e6;
+      color: #444;
+      font-size: 14px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    /* Content placeholder */
+    .content {
+      padding: 40px;
+      text-align: center;
+      color: #888;
+    }
+  </style>
+</head>
+<body bgcolor=pink>
+
+  <!-- Header -->
+  <div class="header" >
+    <img src="8.jpg" alt="Logo" class="logo">
+    <div class="title">Mother Theresa Institute of Computer Applications, Palamaner</div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="#">Home</a>
+
+    <!-- Sem 1 -->
+    <div class="dropdown">
+      <button>Sem-1</button>
+      <div class="dropdown-content">
+        <a href="#">Paper 1 - Mathematics</a>
+        <a href="#">Paper 2 - C Programming</a>
+        <a href="#">Paper 3 - Computer Fundamentals</a>
+        <a href="#">Paper 4 - English Communication</a>
+        <a href="#">Paper 5 - Soft Skills</a>
+      </div>
+    </div>
+
+    <!-- Sem 2 -->
+    <div class="dropdown">
+      <button>Sem-2</button>
+      <div class="dropdown-content">
+        <a href="#">Paper 1 - Data Structures</a>
+        <a href="#">Paper 2 - DBMS</a>
+        <a href="#">Paper 3 - Operating Systems</a>
+        <a href="#">Paper 4 - OOPs with C++</a>
+        <a href="#">Paper 5 - Environmental Studies</a>
+      </div>
+    </div>
+
+    <!-- Sem 3 -->
+    <div class="dropdown">
+      <button>Sem-3</button>
+      <div class="dropdown-content">
+        <a href="#">Paper 1 - Java Programming</a>
+        <a href="#">Paper 2 - Web Technologies</a>
+        <a href="#">Paper 3 - Computer Networks</a>
+        <a href="#">Paper 4 - Software Engineering</a>
+        <a href="#">Paper 5 - Aptitude</a>
+      </div>
+    </div>
+
+    <!-- Sem 4 -->
+    <div class="dropdown">
+      <button>Sem-4</button>
+      <div class="dropdown-content">
+        <a href="#">Paper 1 - Python Programming</a>
+        <a href="#">Paper 2 - Cloud Computing</a>
+        <a href="#">Paper 3 - AI & ML Basics</a>
+        <a href="#">Paper 4 - Project Work</a>
+        <a href="#">Paper 5 - Seminar</a>
+      </div>
+    </div>
+
+    <a href="MOTHER.html">Login</a>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <h2>Welcome to the MTICA Student Portal</h2>
+    <p>Select a semester and paper from the menu to get started.</p>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    © uday, 2724176 | <a href="mailto:pudaykiran777@gmail.com">pudaykiran777@gmail.com</a>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Digit Operations</title>
+  <script>
+    function getNumber() {
+      return document.getElementById("txtNumber").value;
+    }
+
+    function sumDigits() {
+      let num = getNumber();
+      let sum = 0;
+      for (let i = 0; i < num.length; i++) {
+        sum += parseInt(num[i]);
+      }
+      document.getElementById("result").value = "Sum of digits: " + sum;
+    }
+
+    function largestDigit() {
+      let num = getNumber();
+      let max = -1;
+      for (let i = 0; i < num.length; i++) {
+        let digit = parseInt(num[i]);
+        if (digit > max) max = digit;
+      }
+      document.getElementById("result").value = "Largest digit: " + max;
+    }+
+
+    function smallestDigit() {
+      let num = getNumber();
+      let min = 10;
+      for (let i = 0; i < num.length; i++) {
+        let digit = parseInt(num[i]);
+        if (digit < min) min = digit;
+      }
+      document.getElementById("result").value = "Smallest digit: " + min;
+    }
+
+    function reverseDigits() {
+      let num = getNumber();
+      let reversed = num.split("").reverse().join("");
+      document.getElementById("result").value = "Reversed digits: " + reversed;
+    }
+  </script>
+</head>
+<body>
+  <h3>Enter a Number: <input type="text" id="txtNumber" /></h3>
+
+  <button onclick="sumDigits()">SumDigits</button>
+  <button onclick="largestDigit()">LargestDigits</button>
+  <button onclick="smallestDigit()">SmallestDigits</button>
+  <button onclick="reverseDigits()">ReverseofDigit()</button>
+
+  <br><br>
+  <input type="text" id="result" size="40" readonly />
+</body>
+</html>

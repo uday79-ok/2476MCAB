@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Training Survey Form</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color:#aaddcc;
+    }
+
+    .container {
+      display: flex;
+      padding: 40px;
+    }
+
+    .form-container, .output-container {
+      background-color:#997788;
+      padding: 20px;
+      margin: 10px;
+      width: 50%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="email"], textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    textarea {
+      height: 80px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #00cc66;
+      color: white;
+      border: none;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .output-container h2 {
+      border-bottom: 1px solid #ccc;
+    }
+
+    .output-container p {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body >
+
+  <h1>Training Survey Form</h1>
+
+  <div class="container">
+    <!-- Form Side -->
+    <div class="form-container">
+      <form id="surveyForm">
+        <label>Name</label>
+        <input type="text" id="name" required>
+
+        <label>Email</label>
+        <input type="email" id="email" required>
+
+        <label>Age</label>
+        <input type="text" id="age" required>
+
+        <label>Which option best describes you?</label>
+        <select id="role">
+          <option value="Student">Student</option>
+          <option value="Professional">Professional</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label>Would you recommend Praveen Sir to a friend?</label><br>
+        <input type="radio" name="recommend" value="Yes" required>Yes
+        <input type="radio" name="recommend" value="No">No
+        <input type="radio" name="recommend" value="Maybe">Maybe
+        <br><br>
+
+        <label>Languages and Frameworks known (Check all that apply)</label><br>
+        <input type="checkbox" value="C">C
+        <input type="checkbox" value="C++">C++
+        <input type="checkbox" value="C#">C#
+        <input type="checkbox" value="Java">Java
+        <input type="checkbox" value="Python">Python
+        <input type="checkbox" value="JavaScript">JavaScript
+        <input type="checkbox" value="React">React
+        <input type="checkbox" value="Angular">Angular
+        <input type="checkbox" value="Django">Django
+        <input type="checkbox" value="Spring">Spring
+        <br><br>
+
+        <label>Any comments or suggestions</label>
+        <textarea id="comments"></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <!-- Output Side -->
+    <div class="output-container">
+      <h2>Submitted Details</h2>
+      <div id="output">
+        <p>Fill out the form to see submitted data here.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("surveyForm");
+    const outputDiv = document.getElementById("output");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const age = document.getElementById("age").value;
+      const role = document.getElementById("role").value;
+      const recommend = document.querySelector('input[name="recommend"]:checked')?.value;
+
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      const languages = Array.from(checkboxes).map(cb => cb.value).join(', ');
+
+      const comments = document.getElementById("comments").value;
+
+      outputDiv.innerHTML = `
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Age:</strong> ${age}</p>
+        <p><strong>Role:</strong> ${role}</p>
+        <p><strong>Recommended:</strong> ${recommend}</p>
+        <p><strong>Languages & Frameworks:</strong> ${languages}</p>
+        <p><strong>Comments:</strong> ${comments}</p>
+      `;
+    });
+  </script>
+
+</body>
+</html>
