@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <script>
+            function a(){//input as string type
+                var s=document.getElementById("a").value;
+                var l=s.charCodeAt(0);
+                document.getElementById("p").innerHTML=l;
+            }
+        </script>
+    </head>
+    <body>
+        Enter the Charter:<input type="text" id="a">
+        <h1 id="p"></h1>
+        <button onclick="a()">Click Me</button>
+    </body>
+</html>
