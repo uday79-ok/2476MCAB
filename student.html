@@ -1,52 +1,195 @@
-<html>
-<body bgcolor="yellow" >
-<table border=5>
-<tr>
-	<td>Name</td>
-	<td>sub1</td>
-	<td>sub2</td>
-	<td>sub3</td>
-	<td>sub4</td>
-</tr>
-<tr>
-	<td>uday</td>
-	<td>99</td>
-	<td>88</td>
-	<td>66</td>
-	<td>55</td>
-</tr>
-<tr>
-	<td>kanna</td>
-	<td>90</td>
-	<td>80</td>
-	<td>60</td>
-	<td>50</td>
-</tr>
-<tr>
-	<td>deepika pilli</td>
-	<td>40</td>
-	<td>50</td>
-	<td>20</td>
-	<td>70</td>
-</tr>
-<tr>
-	<td>sakshi</td>
-	<td>93</td>
-	<td>81</td>
-	<td>67</td>
-	<td>54</td>
-</tr>
-<tr>
-	<td>ms dhoni</td>
-	<td>90</td>
-	<td>80</td>
-	<td>60</td>
-	<td>50</td>
-</tr>
-</table>
-<a href=prog2.html>
- home 
-</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px;
+      background-color: #bbccdd;
+    }
+
+    .container {
+      display: flex;
+      gap: 40px;
+    }
+
+    .form-container {
+      padding: 20px;
+      border: 1px solid #aaa;
+      background-color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-container.update-background {
+      background-color: #e6f0ff;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 6px 16px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    #submitBtn.submit-mode {
+      background-color:blue;
+    }
+
+    #submitBtn.update-mode {
+      background-color: #aabbcc;
+    }
+
+    button.delete-btn {
+      background-color: #ddccaa; 
+    }
+
+    button.update-btn {
+      background-color: green;
+    }
+
+    .table-container {
+      border: 1px solid #000;
+      padding: 10px;
+      background-color:pink;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 500px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ffc107;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color:yellow;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-container" id="formContainer">
+      <h2>Enter Student Details</h2>
+      <form id="studentForm">
+        <input type="text" id="studentName" placeholder="Enter Student Name" required><br>
+        <input type="text" id="collegeName" placeholder="Enter College Name" required><br>
+        <input type="text" id="course" placeholder="Enter Course Name" required><br>
+        <button type="submit" id="submitBtn">Submit</button>
+      </form>
+    </div>
+
+    <div class="table-container">
+      <table id="studentTable">
+        <tr>
+          <th>Student Name</th>
+          <th>College</th>
+          <th>Course</th>
+          <th>Action</th>
+        </tr>
+        <!-- Student rows will go here -->
+      </table>
+    </div>
+  </div>
+
+
+    const form = document.getElementById('studentForm');
+    const table = document.getElementById('studentTable');
+    const submitBtn = document.getElementById('submitBtn');
+    const formContainer = document.getElementById('formContainer');
+
+    let editRow = null;
+
+    // Initial submit button mode
+    submitBtn.classList.add('submit-mode');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('studentName').value;
+      const college = document.getElementById('collegeName').value;
+      const course = document.getElementById('course').value;
+
+      if (editRow) {
+        // Update selected row
+        editRow.cells[0].innerText = name;
+        editRow.cells[1].innerText = college;
+        editRow.cells[2].innerText = course;
+
+        submitBtn.textContent = 'Submit';
+        submitBtn.classList.remove('update-mode');
+        submitBtn.classList.add('submit-mode');
+        formContainer.classList.remove('update-background');
+        editRow = null;
+      } else {
+        // Add new row
+        const newRow = table.insertRow();
+        newRow.innerHTML = `
+          <td>${name}</td>
+          <td>${college}</td>
+          <td>${course}</td>
+          <td>
+            <button class="update-btn" onclick="editThisRow(this)">Update</button>
+            <button class="delete-btn" onclick="deleteRow(this)">Delete</button>
+          </td>
+        `;
+      }
+
+      form.reset();
+    });
+
+    function deleteRow(btn) {
+      const row = btn.parentNode.parentNode;
+      if (editRow === row) {
+        form.reset();
+        submitBtn.textContent = 'Submit';
+        submitBtn.classList.remove('update-mode');
+        submitBtn.classList.add('submit-mode');
+        formContainer.classList.remove('update-background');
+        editRow = null;
+      }
+      row.remove();
+    }
+
+    function editThisRow(btn) {
+      const row = btn.parentNode.parentNode;
+      editRow = row;
+
+      document.getElementById('studentName').value = row.cells[0].innerText;
+      document.getElementById('collegeName').value = row.cells[1].innerText;
+      document.getElementById('course').value = row.cells[2].innerText;
+
+      submitBtn.textContent = 'Update';
+      submitBtn.classList.remove('submit-mode');
+      submitBtn.classList.add('update-mode');
+      formContainer.classList.add('update-background');
+    }
+  </script>
 </body>
-</hrml>
-	
+</html>

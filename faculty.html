@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Faculty Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px;
+      background-color: pink;
+    }
+
+    .container {
+      display: flex;
+      gap: 40px;
+    }
+
+    .form-container {
+      padding: 20px;
+      border: 1px solid #aaa;
+      background-color:#aabbcc;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 8px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    .table-container {
+      border: 1px solid #000;
+      padding: 10px;
+      background-color:#aaccdd;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 600px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: orange;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <h2>Enter faculty details</h2>
+      <form id="facultyForm">
+        <input type="text" id="name" placeholder="Enter the Faculty Name" required><br>
+        <input type="text" id="department" placeholder="Enter the Faculty Department" required><br>
+        <input type="text" id="subject" placeholder="Enter the Subject Name" required><br>
+        <input type="number" id="age" placeholder="Enter Age" required><br>
+        <input type="text" id="address" placeholder="Enter the Address of a Faculty" required><br>
+        <button type="submit" id="submitBtn">Submit</button>
+      </form>
+    </div>
+
+    <div class="table-container">
+      <table id="facultyTable">
+        <tr>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Subject</th>
+          <th>Age</th>
+          <th>Place</th>
+          <th>Action</th>
+        </tr>
+        <!-- Rows will be added here -->
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('facultyForm');
+    const table = document.getElementById('facultyTable');
+    const submitBtn = document.getElementById('submitBtn');
+
+    let editRow = null;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const dept = document.getElementById('department').value;
+      const subject = document.getElementById('subject').value;
+      const age = document.getElementById('age').value;
+      const address = document.getElementById('address').value;
+
+      if (editRow) {
+        // Update existing row
+        editRow.cells[0].innerText = name;
+        editRow.cells[1].innerText = dept;
+        editRow.cells[2].innerText = subject;
+        editRow.cells[3].innerText = age;
+        editRow.cells[4].innerText = address;
+        submitBtn.textContent = 'Submit';
+        editRow = null;
+      } else {
+        // Add new row
+        const newRow = table.insertRow();
+        newRow.innerHTML = `
+          <td>${name}</td>
+          <td>${dept}</td>
+          <td>${subject}</td>
+          <td>${age}</td>
+          <td>${address}</td>
+          <td>
+            <button onclick="editRowFunc(this)">Update</button>
+            <button onclick="deleteRow(this)">Delete</button>
+          </td>
+        `;
+      }
+
+      form.reset();
+    });
+
+    function deleteRow(btn) {
+      const row = btn.parentNode.parentNode;
+      row.remove();
+      // Reset form if currently editing this row
+      if (editRow === row) {
+        form.reset();
+        submitBtn.textContent = 'Submit';
+        editRow = null;
+      }
+    }
+
+    function editRowFunc(btn) {
+      editRow = btn.parentNode.parentNode;
+      document.getElementById('name').value = editRow.cells[0].innerText;
+      document.getElementById('department').value = editRow.cells[1].innerText;
+      document.getElementById('subject').value = editRow.cells[2].innerText;
+      document.getElementById('age').value = editRow.cells[3].innerText;
+      document.getElementById('address').value = editRow.cells[4].innerText;
+      submitBtn.textContent = 'Update';
+    }
+  </script>
+</body>
+</html>
