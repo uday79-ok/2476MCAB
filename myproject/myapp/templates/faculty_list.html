@@ -1,0 +1,17 @@
+{% extends "master.html" %}
+
+{% block title %}Faculty List{% endblock %}
+
+{% block content %}
+    <h1>Faculty List</h1>
+    <ul>
+        {% for faculty in faculties %}
+            <li>
+                {{ faculty.first_name }} {{ faculty.last_name }} - 
+                {{ faculty.department }} - {{ faculty.joining_date }}
+                <a href="{% url 'faculty_update' faculty.pk %}">Edit</a> |
+                <a href="{% url 'faculty_delete' faculty.pk %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
