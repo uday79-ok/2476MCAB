@@ -1,0 +1,51 @@
+<h1>Welcome to Canteen</h1>
+<form method="get">
+    <input type="text" name="q" placeholder="Search..." />
+    <input type="submit" value="Search" />
+</form>
+<ul>
+    {% for item in items %}
+    <li>
+        <strong>{{ item.name }}</strong> - ₹{{ item.price }}
+        <a href="{% url 'add_to_cart' item.id %}">Add to Cart</a>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'cart' %}">Go to Cart</a>
+cart.html
+html
+Copy
+Edit
+<h2>Your Cart</h2>
+<ul>
+    {% for cart_item in cart_items %}
+    <li>{{ cart_item.item.name }} x {{ cart_item.quantity }} = ₹{{ cart_item.item.price|floatformat:2 }}</li>
+    {% endfor %}
+</ul>
+<p><strong>Total: ₹{{ total|floatformat:2 }}</strong></p>
+<a href="{% url 'checkout' %}">Checkout</a>
+checkout.html
+html
+Copy
+Edit
+<h2>Payment Successful</h2>
+<p>Order Total: ₹{{ order.total }}</p>
+<a href="{% url 'history' %}">View Order History</a>
+history.html
+html
+Copy
+Edit
+<h2>Your Orders</h2>
+<ul>
+    {% for order in orders %}
+    <li>
+        ₹{{ order.total }} - {{ order.created_on|date:"d M Y H:i" }}
+        <ul>
+            {% for item in order.items.all %}
+            <li>{{ item.item.name }} x {{ item.quantity }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'home' %}">Back to Home</a>
