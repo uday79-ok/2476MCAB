@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h4>Scan to Pay ₹50</h4>
+<img src="{% url 'payment_qr' %}" width="300" alt="UPI QR Code">
+{% endblock %}

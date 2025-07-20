@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #FFF3E0; /* Light warm cream background */
+    }
+    .card {
+        background-color: #ffffff; /* White card */
+        border: none;
+    }
+    .btn-custom {
+        background-color: #8B4000;
+        color: #FFF8E7;
+        border: none;
+    }
+    .btn-custom:hover {
+        background-color: #a34c0b;
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow p-4 mt-5">
+            <h4 class="text-center mb-4">LOGIN</h4>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-custom">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}  AND rememder me and forget password
