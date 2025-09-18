@@ -1,0 +1,91 @@
+import java.util.Scanner;
+class HeapSorting
+{
+	public static void main(String[] args)
+		{
+		Scanner sc=new Scanner(System.in);
+		HeapSort heapsort=new HeapSort();
+		boolean running=true;
+		while(running)
+			{
+			System.out.println("......HeapSort Menu......");
+			System.out.println("1.insert elements");
+			System.out.println("2.Exit");
+			System.out.println("Choose an option:");
+			int choice=sc.nextInt();
+			switch(choice)
+				{
+				case 1:
+					System.out.println("Enter the number of elemnets:");
+					int n=sc.nextInt();
+					int[] arr=new int[n];
+					System.out.println("Enter the numbers:");
+					for (int i=0;i<n ;i++ )
+					{
+						arr[i]=sc.nextInt();
+					}
+					System.out.println("BEFORE SORTING ELEMENTS:");
+					printarr(arr);
+					heapsort.heapsort(arr);
+					System.out.println("AFTER SORTING ELEMENTS:");
+					printarr(arr);
+					break;
+				case 2:
+					running=false;
+					System.out.println("Exiting...");
+					break;
+				default:
+					System.out.println("Invalid option");
+			}
+		}
+		sc.close();
+	}
+	private static void printarr(int[] arr)
+		{
+		for(int num:arr)
+			{
+			System.out.print(num+" ");
+		}
+		System.out.println();
+	}
+}
+class HeapSort
+{
+	public void heapsort(int[] arr)
+		{
+		int n=arr.length;
+		for(int i=n/2-1;i>=0;i--)
+			{
+			heapify(arr,n,i);
+		}
+		for(int i=n-1;i>=0;i--)
+			{
+			int temp=arr[0];
+			arr[0]=arr[i];
+			arr[i]=temp;
+			heapify(arr,i,0);
+		}
+	}
+	private void heapify(int[] arr,int n,int i)
+		{
+		int largest=i; 
+		int lc=2*i+1;
+		int rc=2*i+2;
+		if(lc<n && arr[lc]>arr[largest])
+		{
+			largest=lc;
+		}
+		if(rc<n && arr[rc]>arr[largest])
+			{
+			largest=rc;
+		}
+		if(largest!=i)
+			{
+			int temp=arr[i];
+			arr[i]=arr[largest];
+			arr[largest]=temp;
+			heapify(arr,n,largest);
+		}
+	}
+}
+

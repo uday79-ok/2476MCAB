@@ -1,0 +1,228 @@
+import java.util.Scanner;
+
+class DoublyLinkedList {
+
+    // Node class to represent each node in the list
+    static class Node {
+        int data;
+        Node prev, next;
+
+        public Node(int data) {
+            this.data = data;
+            this.prev = null;
+            this.next = null;
+        }
+    }
+
+    private Node head; // Head of the list
+
+    // Constructor to initialize the doubly linked list
+    public DoublyLinkedList() {
+        head = null;
+    }
+
+    // Method to insert a node at the beginning of the list
+    public void insertAtBeginning(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+        }
+    }
+
+    // Method to insert a node at the end of the list
+    public void insertAtEnd(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node temp = head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = newNode;
+            newNode.prev = temp;
+        }
+    }
+
+    // Method to display the list from beginning to end
+    public void display() {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + "   ");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+
+    // Merge two sorted lists into one sorted list
+    public static DoublyLinkedList merge(DoublyLinkedList list1, DoublyLinkedList list2) {
+        Node temp1 = list1.head;
+        Node temp2 = list2.head;
+        DoublyLinkedList mergedList = new DoublyLinkedList();
+
+        while (temp1 != null && temp2 != null) {
+            if (temp1.data <= temp2.data) {
+                mergedList.insertAtEnd(temp1.data);
+                temp1 = temp1.next;
+            } else {
+                mergedList.insertAtEnd(temp2.data);
+                temp2 = temp2.next;
+            }
+        }
+
+        // Insert remaining elements from list1 or list2
+        while (temp1 != null) {
+            mergedList.insertAtEnd(temp1.data);
+            temp1 = temp1.next;
+        }
+
+        while (temp2 != null) {
+            mergedList.insertAtEnd(temp2.data);
+            temp2 = temp2.next;
+        }
+
+        return mergedList;
+    }
+
+    // Sort the doubly linked list using Merge Sort
+    public void mergeSort() {
+        head = mergeSortRec(head);
+    }
+
+    // Helper recursive mergeSort method
+    private Node mergeSortRec(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Find the middle node of the list
+        Node middle = getMiddle(head);
+        Node nextOfMiddle = middle.next;
+
+        // Set the next of middle node to null to split the list
+        middle.next = null;
+
+        // Recursively sort the two halves
+        Node left = mergeSortRec(head);
+        Node right = mergeSortRec(nextOfMiddle);
+
+        // Merge the sorted halves
+        return mergeTwoSortedLists(left, right);
+    }
+
+    // Merge two sorted lists
+    private Node mergeTwoSortedLists(Node left, Node right) {
+        // Base cases
+        if (left == null) return right;
+        if (right == null) return left;
+
+        // Compare the data and recursively merge
+        if (left.data <= right.data) {
+            left.next = mergeTwoSortedLists(left.next, right);
+            left.next.prev = left;
+            left.prev = null;
+            return left;
+        } else {
+            right.next = mergeTwoSortedLists(left, right.next);
+            right.next.prev = right;
+            right.prev = null;
+            return right;
+        }
+    }
+
+    // Find the middle node of a list
+    private Node getMiddle(Node head) {
+        if (head == null) {
+            return head;
+        }
+
+        Node slow = head;
+        Node fast = head;
+
+        // Move fast by two and slow by one
+        // Finally slow will have the middle node
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+    // Main method to test the Doubly Linked List
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        DoublyLinkedList list1 = new DoublyLinkedList();
+        DoublyLinkedList list2 = new DoublyLinkedList();
+
+        while (true) {
+            System.out.println("Choose an operation:");
+            System.out.println("1. Insert at Beginning (List 1)");
+            System.out.println("2. Insert at End (List 1)");
+            System.out.println("3. Insert at Beginning (List 2)");
+            System.out.println("4. Insert at End (List 2)");
+            System.out.println("5. Display List 1");
+            System.out.println("6. Display List 2");
+            System.out.println("7. Merge List 1 and List 2");
+            System.out.println("8. Sort List 1");
+            System.out.println("9. Exit");
+
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter value to insert at beginning (List 1): ");
+                    int value1 = sc.nextInt();
+                    list1.insertAtBeginning(value1);
+                    break;
+                case 2:
+                    System.out.print("Enter value to insert at end (List 1): ");
+                    int value2 = sc.nextInt();
+                    list1.insertAtEnd(value2);
+                    break;
+                case 3:
+                    System.out.print("Enter value to insert at beginning (List 2): ");
+                    int value3 = sc.nextInt();
+                    list2.insertAtBeginning(value3);
+                    break;
+                case 4:
+                    System.out.print("Enter value to insert at end (List 2): ");
+                    int value4 = sc.nextInt();
+                    list2.insertAtEnd(value4);
+                    break;
+                case 5:
+                    System.out.println("List 1:");
+                    list1.display();
+                    break;
+                case 6:
+                    System.out.println("List 2:");
+                    list2.display();
+                    break;
+                case 7:
+                    DoublyLinkedList mergedList = merge(list1, list2);
+                    System.out.println("Merged List:");
+                    mergedList.display();
+                    break;
+                case 8:
+                    System.out.println("Sorting List 1...");
+                    list1.mergeSort();
+                    list1.display();
+                    break;
+                case 9:
+                    System.out.println("Exiting...");
+                    sc.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+}

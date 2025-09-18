@@ -1,0 +1,13 @@
+package Uday;
+public class Pack
+{
+	public void type()
+	{
+		System.out.println("I am typing here");
+	}
+	static void play()
+	{
+		System.out.println("I am playing cricket");
+	}
+
+}

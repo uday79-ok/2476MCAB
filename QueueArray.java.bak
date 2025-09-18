@@ -1,0 +1,69 @@
+import java.util.Scanner;
+class QueueArray
+{
+	static Scanner inp=new Scanner(System.in);
+	static int arr[];
+	static int rear;
+	static int front;
+	static int len;
+	static void eq()
+	{
+		int info=inp.nextInt();
+		arr[rear]=info;
+		rear++;
+	}
+	static void display()
+	{
+		System.out.print("Queue: [");
+		for (int i=0;i<len ;i++ )
+		{
+			System.out.print(arr[i]+" ");
+		}
+		System.out.println(" ]");
+	}
+	static void dq()
+	{
+		for (int i=0;i<len-1 ;i++ )
+		{
+			arr[i]=arr[i+1];
+		}
+		len--;
+	}
+	public static void main(String args[])
+	{
+		System.out.println("enter size of queue using array");
+		len=inp.nextInt();
+		System.out.println("enter elements into Array_Queue: ");
+		arr =new int[len+1];
+		for (int i=0;i<len ;i++ )
+		{
+			eq();
+		}
+		while (true)
+		{
+			System.out.println(".........Queue Operations:...........");
+            System.out.println("1.Display");
+            System.out.println("2. Enqueue");
+            System.out.println("3. Dnqueue");
+            System.out.println("4. Exit");
+            System.out.println("Enter your choice: ");
+			int choice=inp.nextInt();
+			switch (choice)
+			{
+			case 1: display(); break;
+			case 2:System.out.println("enter element to insert: ");
+				eq();
+				len++; 
+				display(); 
+				break;
+			case 3:dq();
+				display();
+				break;
+			case 4:System.out.println("exiting from the program...");
+				System.exit(0);
+				break;
+			default:System.out.println("enter valid choice");
+			}
+		}
+	}
+}

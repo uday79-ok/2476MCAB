@@ -1,0 +1,57 @@
+import java.util.Scanner;
+class ProducerConsumer
+{
+	public static void main(String args[])
+	{
+		 Scanner sc=new Scanner(System.in);
+		int[] Buffer=new int[10];
+		int bufsize,in,out,produce,consume,choice=0;
+		in=0;
+		out=0;
+		bufsize=10;
+		while(choice!=3)
+		{
+			System.out.println("\n produce\t2 comsume\t3 exit");
+			in=0;
+			out=0;
+			bufsize=10;
+while(choice!=3)
+		{
+			System.out.println("\n produce\t2 comsume\t3 exit");
+System.out.println("\n enter your choice:");
+choice=sc.nextInt();
+switch(choice)
+			{
+	case 1:
+		if((in+1) %bufsize==out)
+				{
+		System.out.println("\n buffer is full");
+				}
+				else
+				{
+					System.out.println("\n enter the value:");
+					produce=sc.nextInt();
+					Buffer[in]=produce;
+					in=(int1) %bufsize;
+				}
+				break;
+				case 2:
+					if(in==out)
+				{
+					System.out.println("\n buffer is empty");
+				}
+				else
+				{
+					consume=Buffer[out];
+					System.out.println("\n the consumed value is"+consume);
+					out=(out+1) %bufsize;
+				}
+				break;
+}
+
+}
+
+}
+	}
+}
+

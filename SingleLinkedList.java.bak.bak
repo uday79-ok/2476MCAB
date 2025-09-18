@@ -1,0 +1,261 @@
+import java.util.*;
+class Node
+{
+int data;
+Node next;
+Node(int data)
+	{
+	this.data=data;
+	this.next=null;
+	}
+}
+class  LinkedList
+{
+Node head;
+public LinkedList()
+	{
+	this.head=null;
+	}
+public void InsertAtBegining(int data)
+	{
+	Node newNode=new Node(data);
+	newNode.next=head;
+	head=newNode;
+	}
+	public void InsertAtEnd(int data)
+	{
+		Node newNode=new Node(data);
+		if(head==null)
+		{
+			head=newNode;
+			return;
+		}
+	Node Current=head;
+	while(Current.next!=null)
+		{
+		Current=Current.next;
+		}
+		Current.next=newNode;
+	}
+	public void InsertAtPosition(int data,int Position)
+	{
+		if(Position<0)
+		{
+			System.out.println("list is empty");
+			return;
+		}
+		if(Position==0)
+		{
+			InsertAtBegining(data);
+			return;
+		}
+		Node newNode=new Node(data);
+		Node Current=head;
+		int count=0;
+		while(Current!=null && count<Position-1)
+		{
+			Current=Current.next;
+			count++;
+		}
+		if(Current==null)
+		{
+			System.out.println("position out of bounds");
+			return;
+		}
+		newNode.next=Current.next;
+		Current.next=newNode;
+	}
+	public void DeleteAtBegining()
+	{
+		if(head==null)
+		{
+      System.out.println("list is empty");
+	  return;
+		}
+		head=head.next;
+	}
+	public void DeleteAtEnd()
+	{
+		if(head==null)
+		{
+			System.out.println("list is empty");
+			return;
+		}
+		if(head.next==null)
+		{
+			head=null;
+			return;
+		}
+		Node Current=head;
+while(Current.next.next!=null)
+		{
+	Current=Current.next;
+		}
+		Current.next=null;
+	}
+	public void DeleteAtPosition(int Position)
+	{
+		if(head==null)
+		{
+		System.out.println("list is empty");
+		return;
+		}
+		if(Position<0)
+		{
+		System.out.println("invalid Position");
+		return;
+		}
+		if(Position==0)
+		{
+			DeleteAtBegining();
+			return;
+		}
+		Node Current=head;
+		int count=0;
+		while(Current!=null && count<Position-1)
+		{
+			Current=Current.next;
+			count++;
+		}
+		if(Current==null||Current.next==null)
+		{
+			System.out.println("position out of bounds");
+			return;
+		}
+		Current.next=Current.next.next;
+	}
+	public void display()
+	{
+		if(head==null)
+		{
+			System.out.println("list is empty");
+			return;
+		}
+		Node Current=head;
+		while (Current!=null)
+		{
+			System.out.print(Current.data+"->");
+			Current=Current.next;
+		}
+		System.out.println("null");
+	}
+	public int Search(int key)
+	{
+		Node Current=head;
+		int Position=0;
+		while(Current!=null)
+		{
+			if(Current.data==key)
+			{
+				return Position;
+			}
+			Current=Current.next;
+			Position++;
+		}
+		return -1;    //not found
+	}
+	public void Merge(LinkedList OtherList)
+	{
+		if(OtherList.head==null)
+		{
+			return;
+		}
+		if(this.head==null)
+		{
+			this.head=OtherList.head;
+			return;
+		}
+		Node Current=this.head;
+		while(Current.next!=null)
+		{
+			Current=Current.next;
+		}
+		Current.next=OtherList.head;
+	}
+}
+public class SingleLinkedList
+{
+public static void main(String args[])
+	{
+	Scanner scn=new Scanner(System.in);
+	LinkedList List1=new LinkedList();
+	LinkedList List2=new LinkedList();
+	int choice;
+	while(true)
+	{
+		System.out.println(".......SingleLinkedList menu......");
+		System.out.println("1.Insert At Begining");
+		System.out.println("2.Insert At End");
+		System.out.println("3.Insert At Position");
+		System.out.println("4.Delete At Begining");
+		System.out.println("5.Delete At End");
+		System.out.println("6.Dlete At Position");
+		System.out.println("7.display");
+		System.out.println("8.Search");
+		System.out.println("9.Merge Lists");
+		System.out.println("10.exit");
+		System.out.println("Enter your choice");
+		choice=scn.nextInt();
+		switch(choice)
+		{
+			case 1:
+				System.out.println("enter data to insert at begining:");
+			List1.InsertAtBegining(scn.nextInt());
+			break;
+			case 2:
+				System.out.println("enter data to insert at end:");
+			List1.InsertAtEnd(scn.nextInt());
+			break;
+			case 3:
+				System.out.print("enter data to insert:");
+			int data=scn.nextInt();
+			System.out.print("enter position:");
+			int Position=scn.nextInt();
+			List1.InsertAtPosition(data,Position);
+			break;
+			case 4:
+				List1.DeleteAtBegining();
+			break;
+			case 5:
+				List1.DeleteAtEnd();
+			break;
+			case 6:
+				System.out.print("enter position to delete:");
+			List1.DeleteAtPosition(scn.nextInt());
+			break;
+			case 7:
+				List1.display();
+			break;
+			case 8:
+				System.out.print("enter element to search for:");
+			int key=scn.nextInt();
+			int SearchResult=List1.Search(key);
+			if(SearchResult!=-1)
+			{
+				System.out.println("element found at position:"+SearchResult);
+			}
+			else
+			{
+				System.out.println("element not found");
+			}
+			break;
+			case 9:
+				System.out.println("enter data for the Second list(enter -1 to stop):");
+			int data2;
+			while((data2=scn.nextInt())!=-1)
+			{
+			List2.InsertAtEnd(data2);
+			}
+			List1.Merge(List2);
+			List2=new LinkedList();
+			break;
+			case 10:
+			System.out.println("exiting.....");
+			System.exit(0);
+			break;
+			default:
+				System.out.println("invalid choice");
+		}
+	}
+	}
+}

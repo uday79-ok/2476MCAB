@@ -1,0 +1,98 @@
+import java.util.Scanner;
+
+public class LinearSearch {
+
+    // Linear search for integers
+    public static int linearSearchInt(int[] arr, int key) {
+        for (int i = 0; i < arr.length; i++)
+            if (arr[i] == key)
+                return i;
+        return -1;
+    }
+
+    // Linear search for characters
+    public static int linearSearchChar(char[] arr, char key) {
+        for (int i = 0; i < arr.length; i++)
+            if (arr[i] == key)
+                return i;
+        return -1;
+    }
+
+    // Linear search for strings
+    public static int linearSearchString(String[] arr, String key) {
+        for (int i = 0; i < arr.length; i++)
+            if (arr[i].equals(key))
+                return i;
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\n=== Linear Search Menu ===");
+            System.out.println("1. Integer Search");
+            System.out.println("2. Character Search");
+            System.out.println("3. String Search");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter number of integers: ");
+                    int n = sc.nextInt();
+                    int[] intArr = new int[n];
+                    System.out.println("Enter integers:");
+                    for (int i = 0; i < n; i++) {
+                        intArr[i] = sc.nextInt();
+                    }
+                    System.out.print("Enter integer to search: ");
+                    int intKey = sc.nextInt();
+                    int intIndex = linearSearchInt(intArr, intKey);
+                    System.out.println(intIndex != -1 ? "Found at index: " + intIndex : "Not found.");
+                    break;
+
+                case 2:
+                    System.out.print("Enter number of characters: ");
+                    int m = sc.nextInt();
+                    char[] charArr = new char[m];
+                    System.out.println("Enter characters:");
+                    for (int i = 0; i < m; i++) {
+                        charArr[i] = sc.next().charAt(0);
+                    }
+                    System.out.print("Enter character to search: ");
+                    char charKey = sc.next().charAt(0);
+                    int charIndex = linearSearchChar(charArr, charKey);
+                    System.out.println(charIndex != -1 ? "Found at index: " + charIndex : "Not found.");
+                    break;
+
+                case 3:
+                    System.out.print("Enter number of strings: ");
+                    int p = sc.nextInt();
+                    sc.nextLine(); // consume leftover newline
+                    String[] strArr = new String[p];
+                    System.out.println("Enter strings:");
+                    for (int i = 0; i < p; i++) {
+                        strArr[i] = sc.nextLine();
+                    }
+                    System.out.print("Enter string to search: ");
+                    String strKey = sc.nextLine();
+                    int strIndex = linearSearchString(strArr, strKey);
+                    System.out.println(strIndex != -1 ? "Found at index: " + strIndex : "Not found.");
+                    break;
+
+                case 4:
+                    System.out.println("Exiting program.");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
